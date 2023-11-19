@@ -50,3 +50,16 @@ Only update
 ```
 /usr/local/bin/python3 /usr/local/opnsense/scripts/netscan/update.py
 ```
+
+## Update from Github
+```
+git pull origin main --rebase
+```
+
+## Push local changes
+```
+make collect
+git add .
+git commit -m "..."
+git push origin main
+```
