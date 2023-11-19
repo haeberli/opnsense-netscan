@@ -46,7 +46,7 @@ Create cron job
 ```
 configctl netscan runonce
 ```
-only update
+Only update
 ```
 /usr/local/bin/python3 /usr/local/opnsense/scripts/netscan/update.py
 ```
