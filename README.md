@@ -37,7 +37,7 @@ Install arp-scan
 make upgrade
 ```
 Create cron job
-* Minutes: 0,5,0,15,20,25,30,35,40,45,50,55
+* Minutes: 0,5,10,15,20,25,30,35,40,45,50,55
 * Hours: *
 * Command: Scan net
 * Description: Scan net
