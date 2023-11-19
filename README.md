@@ -26,6 +26,13 @@ cd /usr/plugins/devel/
 git clone git@github.com:haeberli/opnsense-netscan.git netscan
 cd netscan
 ```
+Install arp-scam
+* Enable FreeBSD repo: /usr/local/etc/pkg/repos/FreeBSD.conf: set enabled to yes
+* SSH: pkg install arp-scan
+* Disable FreeBSD repo: Switch back to no
+* Test: arp-scan -I bridge0 -l
+
+
 ## Create and install package
 ```
 make upgrade
