@@ -13,6 +13,8 @@ class ServiceController extends ApiControllerBase
 
         $response = (new Backend())->configdpRun('netscan list');
 
+        $response = str_replace('""', '"~"', $response);
+
         $parsed = json_decode($response, true);
 
         return $this->searchRecordsetBase($parsed);

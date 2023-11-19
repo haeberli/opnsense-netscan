@@ -4,7 +4,7 @@
             <tr>
                 <th data-column-id="Name" data-formatter="multiline" data-width="12em" >Name</th>
                 <th data-column-id="Device" data-width="10em">Device</th>
-                <th data-column-id="IPV4" data-width="5em" data-formatter="multiline">IPv4</th>
+                <th data-column-id="IPV4" data-width="5em" data-formatter="multiline" data-order="asc">IPv4</th>
                 <th data-column-id="IPV6" data-width="12em" data-formatter="multiline">IPv6</th>
                 <th data-column-id="MAC" data-width="9em">MAC Address</th>
                 <th data-column-id="Last" data-width="7em" data-formatter="since">Last Seen</th>
@@ -58,6 +58,7 @@ function timeSince(date) {
                  selection: false,
                  formatters: {
                      "multiline": function (column, row) {
+									 if (row[column.id] == "~") return "";
                            return row[column.id].replaceAll('\\','<br />');
                       },
                       "since": function(column, row) {
@@ -65,8 +66,8 @@ function timeSince(date) {
                       },
                       "commands": function (column, row) {
                             return '<button type="button" class="btn btn-xs btn-default command-edit bootgrid-tooltip" data-row-id="' + row.MAC + '"><span class="fa fa-fw fa-pencil"></span></button>';
-                        },
-                 }
+                      }
+						},
               }
            });
     });
