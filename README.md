@@ -41,3 +41,12 @@ Create cron job
 * Hours: *
 * Command: Scan net
 * Description: Scan net
+
+## Manual run
+```
+configctl netscan runonce
+```
+only update
+```
+/usr/local/bin/python3 /usr/local/opnsense/scripts/netscan/update.py
+```
