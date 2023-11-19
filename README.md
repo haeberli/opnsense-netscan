@@ -19,4 +19,14 @@ chmod 600 /root/.ssh/id_ed25519
 Check Github connection
 ```
 ssh -vT git@github.com
-``` 
+```
+Inital get
+```
+cd /usr/plugins/devel/
+git clone git@github.com:haeberli/opnsense-netscan.git netscan
+cd netscan
+```
+## Create and install package
+```
+make upgrade
+```
