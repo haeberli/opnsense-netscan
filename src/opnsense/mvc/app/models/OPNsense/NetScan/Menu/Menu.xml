@@ -1,0 +1,5 @@
+<menu>
+  <Reporting>
+    <Netscan cssClass="fa fa-server" VisibleName="Net Scan" url="/ui/netscan/"/>
+  </Reporting>
+</menu>

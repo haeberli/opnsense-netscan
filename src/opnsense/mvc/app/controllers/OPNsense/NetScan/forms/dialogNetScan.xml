@@ -1,0 +1,21 @@
+<form>
+    <field>
+        <id>netscan.MAC</id>
+        <label>MAC</label>
+        <type>text</type>
+        <help>MAC address of the device</help>
+        <readonly>true</readonly>
+    </field>
+    <field>
+        <id>netscan.Name</id>
+        <label>Name</label>
+        <type>text</type>
+        <help>Common name of the device</help>
+    </field>
+    <field>
+        <id>netscan.Device</id>
+        <label>Device</label>
+        <type>text</type>
+        <help>Device type or vendor of the device</help>
+    </field>
+</form>

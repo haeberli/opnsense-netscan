@@ -1,0 +1,8 @@
+<model>
+    <mount>//OPNsense/netscan</mount>
+    <description>
+        Net scan plugin
+    </description>
+    <items>
+    </items>
+</model>
