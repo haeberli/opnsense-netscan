@@ -26,14 +26,18 @@ cd /usr/plugins/devel/
 git clone git@github.com:haeberli/opnsense-netscan.git netscan
 cd netscan
 ```
-Install arp-scam
+Install arp-scan
 * Enable FreeBSD repo: /usr/local/etc/pkg/repos/FreeBSD.conf: set enabled to yes
 * SSH: pkg install arp-scan
 * Disable FreeBSD repo: Switch back to no
 * Test: arp-scan -I bridge0 -l
 
-
 ## Create and install package
 ```
 make upgrade
 ```
+Create cron job
+* Minutes: 0,5,0,15,20,25,30,35,40,45,50,55
+* Hours: *
+* Command: Scan net
+* Description: Scan net
