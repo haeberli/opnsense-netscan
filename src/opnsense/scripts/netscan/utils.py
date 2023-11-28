@@ -11,8 +11,9 @@ import json
 
 HOST_FILE='/var/netscan.txt'
 
-DIGARGS = ['+noadditional', '+noauthority', '+noclass', '+nocmd', '+nocomments', '+nocookie', '+nocrypto', '+noquestion' ,'+norrcomments', '+nostats', '+nottlid', '+time=1', '+tries=3']
+DIGARGS = ['+noauthority', '+noclass', '+nocmd', '+nocomments', '+nocookie', '+nocrypto', '+noquestion' ,'+norrcomments', '+nostats', '+nottlid', '+time=1', '+tries=3']
 dig_re = re.compile(r'PTR\s+(?P<DOMAIN>.*)\n')
+digtxt_re = re.compile(r'TXT\s+(?P<DOMAIN>.*)\n')
     
 def getdnsname(ip):
   dig_raw = subprocess.run(['dig', '-x', ip] + 
@@ -24,16 +25,18 @@ def getdnsname(ip):
   return ret
  
 def getmdnsname(ip):
-  dig_raw = subprocess.run(['dig', '-x', ip, '-p', '5353', '@224.0.0.251'] +
+  dig_raw = subprocess.run(['dig', '-x', ip, '-p', '5353', '@' + ip] + 
     DIGARGS, capture_output=True, text=True).stdout
   ret = dig_re.findall(dig_raw)
+  rettxt = digtxt_re.findall(dig_raw)
   if not ret:
-    dig_raw = subprocess.run(['dig', '-x', ip, '-p', '5353', '@' + ip] +
+    dig_raw = subprocess.run(['dig', '-x', ip, '-p', '5353', '@224.0.0.251'] + 
       DIGARGS, capture_output=True, text=True).stdout
     ret = dig_re.findall(dig_raw)
+    rettxt = digtxt_re.findall(dig_raw)
  
-  print('  -> mDNS', ip, ret)
-  return ret 
+  print('  -> mDNS', ip, ret, rettxt)
+  return ret, rettxt
 
 def gethosts():
   hosts = []
@@ -65,8 +68,10 @@ def getshellysettings(ip):
 def getboseinfo(ip):
   try:
     r = requests.get('http://' + ip + ':8090/info', timeout=10)
+    print('  -> Bose Info', r.status_code)
     return xmltodict.parse(r.text)
   except Exception:
+    print('  -> Bose Info failed')
     return None
 
 def getwizsystemconfig(ip):

@@ -81,7 +81,7 @@ for m in mac:
   if not r:
     r = {'MAC':m, 'Last':None,
          'IPV4a':[], 'IPV4':'', 'IPV6a':[], 'IPV6':'',
-         'N4a':[], 'N6a':[], 'NMa':[],
+         'N4a':[], 'N6a':[], 'NMa':[], 'NTa':[],
          'Type':'', 'N':'', 'Name':'', 'Device': ''}
     result.append(r)
 
@@ -105,13 +105,19 @@ for m in mac:
 
   # mdns entries
   if ipv4 and not r['NMa']:
-    nma = [j.replace('.local.', '' ) for i in ipv4 for j in getmdnsname(i)]
+    ret = [j for i in ipv4 for j in getmdnsname(i)]
+    nma = [i.replace('.local.', '') for i in ret[0]]
+    nta = [i for i in ret[1]]
     if nma:
       r['NMa'] = nma
+    if nta:
+      r['NTa'] = nta
 
   print('  Last seen:', ('now' if r['Last'] == now else r['Last']))
   print('  IPv4:', r['IPV4'], '\\'.join(r['N4a']), '\\'.join(r['NMa']))
   print('  IPv6:', r['IPV6'], '\\'.join(r['N6a']))
+  if r['NTa']:
+    print('  TXT:', '\\'.join(r['NTa']))
          
   # name, device
   name = None
@@ -162,7 +168,8 @@ for m in mac:
       names = sorted(r['N4a']) + sorted(r['N6a']) + sorted(r['NMa'])
       name = names[0] if names else h['Name'] if h else '???'
     if not device:
-      device = h['Device'] if h else oui.get(m.replace(':', '')[:6].upper(),  '???')
+      dt = '\\'.join([i.replace('\"model=J105aAP\"', 'Apple TV 4K').replace('\"model=J517AP\"', 'Apple iPad Pro') for i in r['NTa']])
+      device = h['Device'] if h else dt if dt else oui.get(m.replace(':', '')[:6].upper(),  '???')
 
     # update hosts
     if h:
