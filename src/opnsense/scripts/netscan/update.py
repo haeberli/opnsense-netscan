@@ -168,7 +168,7 @@ for m in mac:
       names = sorted(r['N4a']) + sorted(r['N6a']) + sorted(r['NMa'])
       name = names[0] if names else h['Name'] if h else '???'
     if not device:
-      dt = '\\'.join([i.replace('\"model=J105aAP\"', 'Apple TV 4K').replace('\"model=J517AP\"', 'Apple iPad Pro 11 (5th Gen)') for i in r['NTa']])
+      dt = '\\'.join([i.replace('\"model=J105aAP\"', 'Apple TV 4K').replace('\"model=J517AP\"', 'Apple iPad Pro 11 (3th Gen)') for i in r['NTa']])
       device = h['Device'] if h else dt if dt else oui.get(m.replace(':', '')[:6].upper(),  '???')
 
     # update hosts
